@@ -1,0 +1,22 @@
+#server
+server:
+  port: 3000
+
+spring:
+  profiles:
+    active: local # 기본 환경 선택
+  mvc:
+    #view
+    static-path-pattern: /static/**
+
+# local 환경
+---
+spring:
+  profiles: local
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
