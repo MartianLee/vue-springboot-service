@@ -1,15 +1,19 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
+    <login></login>
+    <button>
+      <router-link :to="{ name: 'SignUp'}">
+          SignUp
+      </router-link>
+    </button>
+    <h2>User List</h2>
     <h3 v-for="(user, index) in users" :key="user.id">
       <router-link :to="{ name: 'DetailUser', params: { id: index }}">
-        {{user.name}} : {{user.phone}}
+        {{user.name}} : {{user.email}}
       </router-link>
     </h3>
-    <div>
-      <p>testtest</p>
-    </div>
+    <h2>Essential Links</h2>
     <ul>
       <li>
         <a
@@ -92,11 +96,16 @@
 </template>
 
 <script>
+import Login from './Login.vue'
+
 export default {
   name: 'HelloWorld',
+  components: {
+    'login': Login
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      msg: 'Welcome to Your SpringBoot + Vue.js App',
       users: []
     }
   },
