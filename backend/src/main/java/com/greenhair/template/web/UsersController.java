@@ -21,9 +21,9 @@ public class UsersController {
         ResponseVO<List<Users>> resp = new ResponseVO<>();
         
         List<Users> list = new ArrayList<>();
-        list.add(new Users("테스트", "010-1111-2222"));
-        list.add(new Users("홍길동", "010-4444-5757"));
-        list.add(new Users("김길동", "010-9999-4343"));
+        list.add(new Users("adsf@wfe.com", "awefawef", "홍길동"));
+        list.add(new Users("gwrfgwe@wfeq.com", "qwerr", "김길동"));
+        list.add(new Users("zveye@wfef.com", "hgfhej", "최길동"));
 
         resp.setResponse(list);
         return resp;
@@ -34,9 +34,9 @@ public class UsersController {
         ResponseVO<Users> resp = new ResponseVO<>();
         
         List<Users> list = new ArrayList<>();
-        list.add(new Users("테스트", "010-1111-2222"));
-        list.add(new Users("홍길동", "010-4444-5757"));
-        list.add(new Users("김길동", "010-9999-4343"));
+        list.add(new Users("adsf@wfe.com", "awefawef", "홍길동"));
+        list.add(new Users("gwrfgwe@wfeq.com", "qwerr", "김길동"));
+        list.add(new Users("zveye@wfef.com", "hgfhej", "최길동"));
 
         resp.setResponse(list.get(id));
         return resp;
