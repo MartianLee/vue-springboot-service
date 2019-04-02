@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <img src="/static/images/logo.png">
+    <img class="logo" src="/static/images/spring-boot-logo.png">
+    <img class="logo" src="/static/images/logo.png">
     <router-view/>
   </div>
 </template>
@@ -19,5 +20,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.logo {
+  width: 24vw;
+  margin-right: 2vw;
 }
 </style>
