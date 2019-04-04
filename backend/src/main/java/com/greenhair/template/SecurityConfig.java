@@ -1,5 +1,6 @@
 package com.greenhair.template;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -8,6 +9,13 @@ import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${config.oauth2.privateKey}")
+    private String privateKey;
+
+    @Value("${config.oauth2.publicKey}")
+    private String publicKey;
+    
     @Override
 	public void configure(WebSecurity web) throws Exception
 	{

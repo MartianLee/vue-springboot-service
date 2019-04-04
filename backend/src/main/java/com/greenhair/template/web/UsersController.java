@@ -7,11 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.greenhair.template.domain.ResponseVO;
 import com.greenhair.template.domain.users.Users;
 import com.greenhair.template.domain.users.UsersRepository;
+import com.greenhair.template.service.JwtService;
+import com.greenhair.template.service.UsersService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +30,12 @@ public class UsersController {
 
     @Autowired
     private UsersRepository userRepository;
+
+    @Autowired
+    private UsersService usersService;
+
+    @Autowired
+    private JwtService jwtService;
 
     @GetMapping
     public ResponseVO<?> getUser() {
@@ -57,9 +66,8 @@ public class UsersController {
             userRepository.save(user);
         } catch(Exception e) {
             return "failed";
-        } finally {
-            return "success";
         }
+        return "success";
     }
 
     @GetMapping("/{id}/update")
@@ -76,24 +84,17 @@ public class UsersController {
         // userRepository.save(user);  // 변경된 정보를 저장
         return "redirect:/users/list";
     }
-
-    @PostMapping("/login")
-    public String login(String userId, String password, HttpSession session) {
-        // Users user = userRepository.findById(userId);
-
-        // if ( user == null ) {
-        //     System.out.println("login failure");
-        //     return "redirect:/users/loginForm";
-        // }
-
-        // if ( !password.equals(user.getPassword()) ) {
-        //     System.out.println("login failure");
-        //     return "redirect:/users/loginForm";
-        // }
-
-        // session.setAttribute("user", user);
-        // System.out.println("login success");
-        return "success";
+    
+    @PostMapping(path = "/login")
+    public String login(@RequestBody Users user) {
+        Users loginUsers;
+        try {
+            loginUsers = usersService.signin(user.getEmail(), user.getPassword());
+            String token = jwtService.create("member", loginUsers, "user");
+            return token;
+        } catch(Exception e) {
+            return "failed";
+        }
     }
 
     @PostMapping("/logout")
