@@ -2,6 +2,7 @@ package com.greenhair.template.service;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ public class JwtServiceImpl implements JwtService{
                          .setHeaderParam("typ", "JWT")
                          .setHeaderParam("regDate", System.currentTimeMillis())
                          .setSubject(subject)
+                         .setExpiration(new Date(System.currentTimeMillis() + 86400 * 1000 * 2))
                          .claim(key, data)
                          .signWith(SignatureAlgorithm.HS256, this.generateKey())
                          .compact();

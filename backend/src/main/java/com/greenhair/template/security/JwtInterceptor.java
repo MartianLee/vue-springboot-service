@@ -20,7 +20,7 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
-        final String token = request.getHeader(HEADER_AUTH);
+        final String token = request.getHeader(HEADER_AUTH).split(" ")[1];
 
         if(token != null && jwtService.isUsable(token)){
             return true;
