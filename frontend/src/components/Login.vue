@@ -43,6 +43,7 @@ export default {
         .then(function (res) {
           window.$cookies.set('FootballDiary', res.data, '2d')
           console.log(res.data)
+          location.reload()
         }, function () {
           console.log('failed')
         })

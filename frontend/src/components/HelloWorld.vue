@@ -1,14 +1,19 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <login></login>
+    <div v-show="loggedIn === false">
+      <login></login>
+    </div>
+    <div v-show="loggedIn === true">
+      <userInfo></userInfo>
+    </div>
     <button>
       <router-link :to="{ name: 'SignUp'}">
           SignUp
       </router-link>
     </button>
-    <router-link :to="{ name: 'UserList'}">
-          UserList
+    <router-link :to="{ name: 'UserInfo'}">
+          UserInfo
       </router-link>
     <h2>Essential Links</h2>
     <ul>
@@ -94,21 +99,48 @@
 
 <script>
 import Login from './Login.vue'
-import UserList from './UserList.vue'
+import UserInfo from './UserInfo.vue'
 
 export default {
   name: 'HelloWorld',
   components: {
     'login': Login,
-    'userList': UserList
+    'userInfo': UserInfo
   },
   data () {
     return {
       msg: 'Welcome to Your SpringBoot + Vue.js App',
-      users: []
+      loggedIn: false,
+      user: {}
     }
   },
   created () {
+    let token = window.$cookies.get('FootballDiary')
+    console.log(token)
+    if (token) {
+      this.$http.get('/api/users', {
+        headers: {
+          Authorization: 'Bearer ' + token // the token is a variable which holds the token
+        }
+      }).then((resp) => {
+        console.log(resp.data)
+        this.loggedInSucceed()
+        this.user = resp.data
+      }, (resp) => {
+        window.$cookies.delete('FootballDiary')
+        this.loggedInFailed()
+        console.log(this.loggedIn)
+        console.log('error')
+      })
+    }
+  },
+  methods: {
+    loggedInSucceed: function () {
+      this.loggedIn = true
+    },
+    loggedInFailed: function () {
+      this.loggedIn = false
+    }
   }
 }
 </script>
