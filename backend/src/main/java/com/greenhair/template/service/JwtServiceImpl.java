@@ -56,7 +56,7 @@ public class JwtServiceImpl implements JwtService{
 	@Override
 	public Map<String, Object> get(String key) {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-		String jwt = request.getHeader("Authorization");
+		String jwt = request.getHeader("Authorization").split(" ")[1];
 		Jws<Claims> claims = null;
 		try {
 			claims = Jwts.parser()
@@ -76,13 +76,15 @@ public class JwtServiceImpl implements JwtService{
 			return testMap;*/
 		}
 		@SuppressWarnings("unchecked")
-		Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
+        Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
+        System.out.println(value);
 		return value;
 	}
 
 	@Override
-	public int getMemberId() {
-		return (int)this.get("member").get("memberId");
+	public long getMemberId() {
+        Integer memberId = (Integer) this.get("member").get("id");
+		return new Long(memberId);
 	}
 
 	@Override

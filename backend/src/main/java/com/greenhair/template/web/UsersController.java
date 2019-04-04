@@ -38,11 +38,10 @@ public class UsersController {
     private JwtService jwtService;
 
     @GetMapping
-    public ResponseVO<?> getUser() {
-        ResponseVO<List<Users>> resp = new ResponseVO<>();
-        List<Users> list = userRepository.findAll();
-        resp.setResponse(list);
-        return resp;
+    public Users getUser() {
+        long memberId = jwtService.getMemberId();
+        Optional<Users> loginUsers = userRepository.findById(memberId);
+        return loginUsers.get();
     }
 
     @GetMapping("{id}")
