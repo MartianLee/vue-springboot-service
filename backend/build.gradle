@@ -1,25 +1,29 @@
-plugins {
-	id 'org.springframework.boot' version '2.2.0.BUILD-SNAPSHOT'
-	id 'java'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
 }
 
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.greenhair'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+bootJar {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
 }
 
 repositories {
-	mavenCentral()
-	maven { url 'https://repo.spring.io/snapshot' }
-	maven { url 'https://repo.spring.io/milestone' }
+    mavenCentral()
 }
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -27,8 +31,12 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-security')
+	// compile ('org.springframework.security:spring-security-jwt:1.0.3.RELEASE')
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+    compile('org.springframework.security.oauth:spring-security-oauth2')
 	compileOnly 'org.projectlombok:lombok'
 	runtime('com.h2database:h2')
 	annotationProcessor 'org.projectlombok:lombok'
+	testCompile("junit:junit")
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
