@@ -4,9 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import VueCookie from 'vue-cookies'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.use(VueCookie)
 
 /* eslint-disable no-new */
 new Vue({

@@ -7,12 +7,9 @@
           SignUp
       </router-link>
     </button>
-    <h2>User List</h2>
-    <h3 v-for="(user, index) in users" :key="user.id">
-      <router-link :to="{ name: 'DetailUser', params: { id: index }}">
-        {{user.name}} : {{user.email}}
+    <router-link :to="{ name: 'UserList'}">
+          UserList
       </router-link>
-    </h3>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -97,11 +94,13 @@
 
 <script>
 import Login from './Login.vue'
+import UserList from './UserList.vue'
 
 export default {
   name: 'HelloWorld',
   components: {
-    'login': Login
+    'login': Login,
+    'userList': UserList
   },
   data () {
     return {
@@ -110,10 +109,6 @@ export default {
     }
   },
   created () {
-    this.$http.get('/api/users').then((resp) => {
-      this.users = resp.data.response
-      console.log('asdfasdf')
-    })
   }
 }
 </script>
