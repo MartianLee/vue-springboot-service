@@ -3,8 +3,10 @@ package com.greenhair.template.domain.diaries;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.greenhair.template.domain.BaseTimeEntity;
 
 import lombok.Builder;
@@ -15,10 +17,10 @@ import lombok.AccessLevel;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Diaries extends BaseTimeEntity {
+public class Diary extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 200, nullable = false)
@@ -29,8 +31,10 @@ public class Diaries extends BaseTimeEntity {
 
     private String author;
 
+    // private Match match;
+
     @Builder
-    public Diaries(String title, String content, String author) {
+    public Diary(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;

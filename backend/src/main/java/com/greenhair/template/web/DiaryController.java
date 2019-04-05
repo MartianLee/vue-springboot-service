@@ -7,30 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.greenhair.template.domain.ResponseVO;
-import com.greenhair.template.domain.matches.Matches;
+import com.greenhair.template.domain.diaries.Diary;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping("/api/matches")
-public class MatchesController {
+@RequestMapping("/api/diary")
+public class DiaryController {
 
     @GetMapping
-    public ResponseVO<?> getMatches() {
-        ResponseVO<List<Matches>> resp = new ResponseVO<>();
+    public ResponseVO<?> getDiary() {
+        ResponseVO<List<Diary>> resp = new ResponseVO<>();
         
-        List<Matches> list = new ArrayList<>();
+        List<Diary> list = new ArrayList<>();
 
         resp.setResponse(list);
         return resp;
     }
 
     @GetMapping("{id}")
-    public ResponseVO<?> getMatches(@PathVariable int id) {
-        ResponseVO<Matches> resp = new ResponseVO<>();
+    public ResponseVO<?> getDiary(@PathVariable int id) {
+        ResponseVO<Diary> resp = new ResponseVO<>();
         
-        List<Matches> list = new ArrayList<>();
+        List<Diary> list = new ArrayList<>();
 
         resp.setResponse(list.get(id));
         return resp;
