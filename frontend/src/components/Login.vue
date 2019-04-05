@@ -29,7 +29,9 @@ export default {
   name: 'Login',
   data () {
     return {
-      token: ''
+      token: '',
+      email: '',
+      password: ''
     }
   },
   created () {

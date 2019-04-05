@@ -23,14 +23,16 @@ export default {
   created () {
     let token = window.$cookies.get('FootballDiary')
     console.log(token)
-    this.$http.get('/api/users', {
-      headers: {
-        Authorization: 'Bearer ' + token // the token is a variable which holds the token
-      }
-    }).then((resp) => {
-      console.log(resp.data)
-      this.user = resp.data
-    })
+    if (token) {
+      this.$http.get('/api/users', {
+        headers: {
+          Authorization: 'Bearer ' + token // the token is a variable which holds the token
+        }
+      }).then((resp) => {
+        console.log(resp.data)
+        this.user = resp.data
+      })
+    }
   }
 }
 </script>

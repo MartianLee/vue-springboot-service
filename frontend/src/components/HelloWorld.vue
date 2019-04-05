@@ -116,6 +116,8 @@ export default {
   },
   created () {
     let token = window.$cookies.get('FootballDiary')
+    // this.$router.push('/')
+    console.log(this.$router)
     console.log(token)
     if (token) {
       this.$http.get('/api/users', {
@@ -127,7 +129,7 @@ export default {
         this.loggedInSucceed()
         this.user = resp.data
       }, (resp) => {
-        window.$cookies.delete('FootballDiary')
+        window.$cookies.remove('FootballDiary')
         this.loggedInFailed()
         console.log(this.loggedIn)
         console.log('error')
