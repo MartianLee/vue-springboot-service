@@ -41,14 +41,13 @@ export default {
       axios.post('/api/users/login', {
         email: this.email,
         password: this.password
+      }).then(res => {
+        window.$cookies.set('FootballDiary', res.data, '2d')
+        console.log(res.data)
+        location.reload()
+      }, () => {
+        console.log('failed')
       })
-        .then(function (res) {
-          window.$cookies.set('FootballDiary', res.data, '2d')
-          console.log(res.data)
-          location.reload()
-        }, function () {
-          console.log('failed')
-        })
     }
   }
 }

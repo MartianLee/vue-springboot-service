@@ -3,18 +3,21 @@
     <h1>{{ msg }}</h1>
     <div v-show="loggedIn === false">
       <login></login>
-    </div>
-    <div v-show="loggedIn === true">
-      <userInfo></userInfo>
-    </div>
-    <button>
+      <button>
       <router-link :to="{ name: 'SignUp'}">
           SignUp
       </router-link>
     </button>
-    <router-link :to="{ name: 'UserInfo'}">
+    </div>
+    <div v-show="loggedIn === true">
+      <userInfo></userInfo>
+      <button v-on:click="onLogout">
+        Logout
+      </button>
+      <router-link :to="{ name: 'UserInfo'}">
           UserInfo
       </router-link>
+    </div>
     <h2>Essential Links</h2>
     <ul>
       <li>
@@ -126,22 +129,21 @@ export default {
         }
       }).then((resp) => {
         console.log(resp.data)
-        this.loggedInSucceed()
+        this.loggedIn = true
         this.user = resp.data
       }, (resp) => {
         window.$cookies.remove('FootballDiary')
-        this.loggedInFailed()
+        this.loggedIn = false
         console.log(this.loggedIn)
         console.log('error')
       })
     }
   },
   methods: {
-    loggedInSucceed: function () {
-      this.loggedIn = true
-    },
-    loggedInFailed: function () {
+    onLogout: function () {
+      window.$cookies.remove('FootballDiary')
       this.loggedIn = false
+      this.$router.push('/')
     }
   }
 }
