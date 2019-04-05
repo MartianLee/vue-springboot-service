@@ -69,11 +69,6 @@ public class JwtServiceImpl implements JwtService{
 				log.error(e.getMessage());
 			}
 			throw new UnauthorizedException();
-			
-			/*개발환경
-			Map<String,Object> testMap = new HashMap<>();
-			testMap.put("memberId", 2);
-			return testMap;*/
 		}
 		@SuppressWarnings("unchecked")
         Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
