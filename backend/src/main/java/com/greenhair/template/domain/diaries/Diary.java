@@ -1,13 +1,22 @@
 package com.greenhair.template.domain.diaries;
 
+import java.util.Optional;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.greenhair.template.domain.BaseTimeEntity;
+import com.greenhair.template.domain.users.Users;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -29,14 +38,17 @@ public class Diary extends BaseTimeEntity {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
 
-    private String author;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "users_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Users users;
 
     // private Match match;
 
     @Builder
-    public Diary(String title, String content, String author) {
+    public Diary(String title, String content, Users users) {
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.users = users;
     }
 }

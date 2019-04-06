@@ -1,15 +1,23 @@
 package com.greenhair.template.domain.users;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.greenhair.template.domain.BaseTimeEntity;
+import com.greenhair.template.domain.diaries.Diary;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,10 +54,18 @@ public class Users extends BaseTimeEntity implements Serializable {
     @JsonProperty
     private String email;
 
+    // @OneToMany(fetch=FetchType.LAZY,
+    //             cascade = CascadeType.ALL,
+    //             mappedBy = "users",
+    //             orphanRemoval = true) // FetchType.LAZY도 있음
+	// @JoinColumn(name="user_id")
+	// private List<Diary> diaries = new ArrayList<>();
+
     @Builder
     public Users(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
+    
 }
