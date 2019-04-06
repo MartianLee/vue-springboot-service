@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.greenhair.template.domain.BaseTimeEntity;
 import com.greenhair.template.domain.users.Users;
@@ -21,10 +22,12 @@ import org.hibernate.annotations.OnDeleteAction;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.AccessLevel;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Setter
 @Entity
 public class Diary extends BaseTimeEntity {
 
@@ -41,6 +44,7 @@ public class Diary extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "users_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
     private Users users;
 
     // private Match match;
