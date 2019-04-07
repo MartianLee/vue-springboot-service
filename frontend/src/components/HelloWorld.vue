@@ -17,6 +17,9 @@
       <router-link :to="{ name: 'UserInfo'}">
           UserInfo
       </router-link>
+      <router-link :to="{ name: 'TimeLine'}">
+          TimeLine
+      </router-link>
     </div>
     <h2>Essential Links</h2>
     <ul>
@@ -119,9 +122,6 @@ export default {
   },
   created () {
     let token = window.$cookies.get('FootballDiary')
-    // this.$router.push('/')
-    console.log(this.$router)
-    console.log(token)
     if (token) {
       this.$http.get('/api/users', {
         headers: {

@@ -6,20 +6,20 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
                 <div class="input-field col s12">
-                <input id="email" name="uemail" type="email" class="validate" v-model="email"/>
                 <label for="email">Email</label>
+                <input id="email" name="uemail" type="email" class="validate" v-model="email"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                <input id="user_name" name="uid" type="text" class="validate" v-model="name"/>
                 <label for="user_name">Username</label>
+                <input id="user_name" name="uid" type="text" class="validate" v-model="name"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                <input id="password" name="upw" type="password" class="validate" v-model="password"/>
                 <label for="password">Password</label>
+                <input id="password" name="upw" type="password" class="validate" v-model="password"/>
                 </div>
             </div>
             <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
