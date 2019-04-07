@@ -36,7 +36,7 @@ public class DiaryController {
     @GetMapping
     public List<Diary> getDiary() {
         long loginUserId = jwtService.getMemberId();
-        List<Diary> diaries = diaryRepository.findByUsersId(loginUserId);
+        List<Diary> diaries = diaryRepository.findByUsersIdOrderByModifiedDateDesc(loginUserId);
         return diaries;
     }
 
