@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -52,13 +53,27 @@ public class DiaryController {
 
     @PostMapping(path = "/create")
     public String create(@RequestBody Diary diary) {
-        try{
+        try {
             long loginUserId = jwtService.getMemberId();
             Optional<Users> loginUsers = usersRepository.findById(loginUserId);
             diary.setUsers(loginUsers.get());
-            System.out.println(loginUserId);
-            System.out.println(loginUsers);
-            System.out.println(diary);
+            diaryRepository.save(diary);
+            return "success";
+        } catch(Exception e) {
+            return "falied";
+        }
+    }
+
+    @PutMapping("/{id}/update")
+    public String updateForm(@PathVariable long id, @RequestBody Diary diary) {
+        try {
+            long loginUserId = jwtService.getMemberId();
+            Optional<Users> loginUsers = usersRepository.findById(loginUserId);
+            Optional<Diary> pastDiary = diaryRepository.findById(id);
+            if (!pastDiary.isPresent())
+		        return "failed";
+            diary.setUsers(loginUsers.get());
+            diary.setId(id);
             diaryRepository.save(diary);
             return "success";
         } catch(Exception e) {

@@ -1,8 +1,8 @@
 <template>
-  <div class="SignUp">
+  <div class="WriteDiary">
     <h1>Write Diary</h1>
-    <div class="Login">
-        <form class="signup-form" v-on:submit.prevent="onCreateDiary" method="POST">
+    <div class="diary">
+        <form class="diary-form" v-on:submit.prevent="onCreateDiary" method="POST">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
                 <div class="input-field col s12">
@@ -16,7 +16,7 @@
                 <textarea id="content" name="uid" rows="6" class="validate" v-model="content"/>
                 </div>
             </div>
-            <input class="signup-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
+            <input class="diary-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
         </form>
     </div>
   </div>
@@ -25,7 +25,7 @@
 <script>
 
 export default {
-  name: 'SignUp',
+  name: 'WriteDiary',
   data () {
     return {
       title: '',
@@ -50,7 +50,7 @@ export default {
         }, () => {
           console.log('failed')
         }).then(res => {
-          this.$router.push('/timeLine')
+          this.$router.push('/diary')
         })
       }
     }

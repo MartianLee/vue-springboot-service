@@ -17,7 +17,7 @@
       <router-link :to="{ name: 'UserInfo'}">
           UserInfo
       </router-link>
-      <router-link :to="{ name: 'TimeLine'}">
+      <router-link :to="{ path: 'diary'}">
           TimeLine
       </router-link>
     </div>

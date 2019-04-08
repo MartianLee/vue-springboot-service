@@ -4,8 +4,11 @@ import HelloWorld from '@/components/HelloWorld'
 import SignUp from '@/components/SignUp'
 import Login from '@/components/Login'
 import UserInfo from '@/components/UserInfo'
-import TimeLine from '@/components/TimeLine'
-import WriteDiary from '@/components/WriteDiary'
+import TimeLine from '@/components/Diary/TimeLine'
+import WriteDiary from '@/components/Diary/WriteDiary'
+import DetailDiary from '@/components/Diary/DetailDiary'
+import ModifyDiary from '@/components/Diary/ModifyDiary'
+import DiaryHome from '@/components/Diary/DiaryHome'
 
 Vue.use(Router)
 
@@ -33,14 +36,26 @@ export default new Router({
       component: UserInfo
     },
     {
-      path: '/timeLine',
-      name: 'TimeLine',
-      component: TimeLine
-    },
-    {
-      path: '/writeDiary',
-      name: 'WriteDiary',
-      component: WriteDiary
+      path: '/diary',
+      component: DiaryHome,
+      children: [
+        {
+          path: '',
+          component: TimeLine
+        },
+        {
+          path: 'write',
+          component: WriteDiary
+        },
+        {
+          path: ':id',
+          component: DetailDiary
+        },
+        {
+          path: ':id/modify',
+          component: ModifyDiary
+        }
+      ]
     }
   ]
 })
