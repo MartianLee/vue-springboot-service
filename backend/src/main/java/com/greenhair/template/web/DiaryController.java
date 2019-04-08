@@ -41,12 +41,12 @@ public class DiaryController {
     }
 
     @GetMapping("{id}")
-    public ResponseVO<?> getDiary(@PathVariable int id) {
+    public ResponseVO<?> getDiary(@PathVariable long id) {
         ResponseVO<Diary> resp = new ResponseVO<>();
 
-        List<Diary> list = new ArrayList<>();
+        Optional<Diary> diary = diaryRepository.findById(id);
 
-        resp.setResponse(list.get(id));
+        resp.setResponse(diary.get());
         return resp;
     }
 
