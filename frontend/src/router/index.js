@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
+import NavBar from '@/components/NavBar'
 import SignUp from '@/components/SignUp'
 import Login from '@/components/Login'
 import UserInfo from '@/components/UserInfo'
@@ -9,6 +10,7 @@ import WriteDiary from '@/components/Diary/WriteDiary'
 import DetailDiary from '@/components/Diary/DetailDiary'
 import ModifyDiary from '@/components/Diary/ModifyDiary'
 import DiaryHome from '@/components/Diary/DiaryHome'
+import editDiaryButtons from '@/components/Diary/Buttons'
 
 Vue.use(Router)
 
@@ -19,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/navbar',
+      name: 'NavBar',
+      component: NavBar
     },
     {
       path: '/signup',
@@ -56,6 +63,11 @@ export default new Router({
           component: ModifyDiary
         }
       ]
+    },
+    {
+      path: 'editButtons',
+      name: 'editButtons',
+      component: editDiaryButtons
     }
   ]
 })

@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <nav-bar></nav-bar>
     <img class="logo" src="/static/images/spring-boot-logo.png">
     <img class="logo" src="/static/images/logo.png">
     <router-view/>
@@ -7,8 +8,13 @@
 </template>
 
 <script>
+import NavBar from './components/NavBar.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'nav-bar': NavBar
+  }
 }
 </script>
 
@@ -22,7 +28,7 @@ export default {
   margin-top: 60px;
 }
 .logo {
-  width: 24vw;
-  margin-right: 2vw;
+  width: 12vw;
+  margin-right: 1vw;
 }
 </style>

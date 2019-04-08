@@ -1,6 +1,6 @@
 <template>
   <div class="TimeLine">
-    <h2>Diares</h2>
+    <h2>Diaries</h2>
     <div class="text-right">
       <router-link :to="{ path: 'diary/write'}">
           Write
@@ -13,6 +13,7 @@
           {{ diaries.length - index }}. {{ diary.title }}
         </router-link>
       </h3>
+      <edit-buttons :id="diary.id"></edit-buttons>
       <h4>
         <!-- {{ diary.homeTeam.title }} vs {{ diary.awayTeam.title }} -->
       </h4>
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import Buttons from './Buttons.vue'
+
 export default {
   name: 'TimeLine',
   data () {
@@ -36,6 +39,9 @@ export default {
       user: {},
       diaries: []
     }
+  },
+  components: {
+    'edit-buttons': Buttons
   },
   created () {
     let token = window.$cookies.get('FootballDiary')

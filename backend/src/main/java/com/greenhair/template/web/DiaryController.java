@@ -15,6 +15,7 @@ import com.greenhair.template.domain.users.UsersRepository;
 import com.greenhair.template.service.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,6 +76,21 @@ public class DiaryController {
             diary.setUsers(loginUsers.get());
             diary.setId(id);
             diaryRepository.save(diary);
+            return "success";
+        } catch(Exception e) {
+            return "falied";
+        }
+    }
+
+    @DeleteMapping("/{id}/delete")
+    public String delete(@PathVariable long id) {
+        try {
+            long loginUserId = jwtService.getMemberId();
+            Optional<Users> loginUsers = usersRepository.findById(loginUserId);
+            Optional<Diary> diary = diaryRepository.findById(id);
+            if (!diary.isPresent() || diary.get().getUsers().getId() != loginUsers.get().getId())
+		        return "failed";
+            diaryRepository.deleteById(id);
             return "success";
         } catch(Exception e) {
             return "falied";
