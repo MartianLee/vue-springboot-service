@@ -68,21 +68,6 @@ public class UsersController {
         }
         return "success";
     }
-
-    @GetMapping("/{id}/update")
-    public String updateForm(@PathVariable Long id) {
-        // Optional<Users> user = userRepository.findById(id);
-        // model.addAttribute("user", user);
-        return "/user/updateForm";
-    }
-
-    @PutMapping("/{id}")
-    public String update(@PathVariable Long id, Users updatedUser) {
-        // Users user = userRepository.findById(id); // 기존의 아이디 정보를 조회
-        // user.update(updatedUser);   // 아이디의 정보 변경
-        // userRepository.save(user);  // 변경된 정보를 저장
-        return "redirect:/users/list";
-    }
     
     @PostMapping(path = "/login")
     public String login(@RequestBody Users user) {
@@ -94,14 +79,6 @@ public class UsersController {
         } catch(Exception e) {
             return "failed";
         }
-    }
-
-    @PostMapping("/logout")
-    public String logout(HttpSession session) {
-        // 세션에 담기 user 를 제거 <-- 변경
-        // session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
-        // System.out.println("logout success");
-        return "redirect:/";
     }
     
 }

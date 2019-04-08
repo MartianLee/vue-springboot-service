@@ -52,7 +52,7 @@ export default {
       let token = window.$cookies.get('FootballDiary')
       let id = this.$route.params.id
       if (token) {
-        this.$http.put(`/api/diary/${id}/update`, this.diary,
+        this.$http.put(`/api/diary/${id}`, this.diary,
           {
             headers: {
               Authorization: 'Bearer ' + token, // the token is a variable which holds the token

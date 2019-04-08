@@ -39,13 +39,15 @@ export default {
         position: fixed;
         width: 100%;
         text-align: center;
+        background: #fff;
     }
     ul {
         padding: 0;
     }
     li {
         display: inline-block;
-        margin-right: 30px;
+        margin-right: 32px;
+        font-size: 1.2em;
     }
     li > a {
         text-decoration: none;

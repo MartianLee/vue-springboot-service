@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      msg: 'Welcome to Your SpringBoot + Vue.js App',
+      msg: 'Developed by MartianLee with SpringBoot + Vue.js',
       loggedIn: false,
       user: {}
     }

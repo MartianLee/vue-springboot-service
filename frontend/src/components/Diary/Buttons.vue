@@ -25,7 +25,7 @@ export default {
     onDelete: function () {
       let token = window.$cookies.get('FootballDiary')
       if (token) {
-        this.$http.delete(`/api/diary/${this.id}/delete`,
+        this.$http.delete(`/api/diary/${this.id}`,
           {
             headers: {
               Authorization: 'Bearer ' + token, // the token is a variable which holds the token

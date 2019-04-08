@@ -38,7 +38,7 @@ export default {
     onCreateDiary: function () {
       let token = window.$cookies.get('FootballDiary')
       if (token) {
-        this.$http.post('/api/diary/create', {
+        this.$http.post('/api/diary', {
           title: this.title,
           content: this.content
         },

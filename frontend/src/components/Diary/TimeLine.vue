@@ -2,9 +2,11 @@
   <div class="TimeLine">
     <h2>Diaries</h2>
     <div class="text-right">
-      <router-link :to="{ path: 'diary/write'}">
-          Write
-      </router-link>
+      <button>
+        <router-link :to="{ path: 'diary/write'}">
+            Write
+        </router-link>
+      </button>
     </div>
     <hr>
     <div v-for="(diary, index) in diaries" :key="diary.id">

@@ -42,7 +42,7 @@ public class DiaryController {
         return diaries;
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseVO<?> getDiary(@PathVariable long id) {
         ResponseVO<Diary> resp = new ResponseVO<>();
 
@@ -52,7 +52,7 @@ public class DiaryController {
         return resp;
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping
     public String create(@RequestBody Diary diary) {
         try {
             long loginUserId = jwtService.getMemberId();
@@ -65,7 +65,7 @@ public class DiaryController {
         }
     }
 
-    @PutMapping("/{id}/update")
+    @PutMapping("/{id}")
     public String updateForm(@PathVariable long id, @RequestBody Diary diary) {
         try {
             long loginUserId = jwtService.getMemberId();
@@ -82,7 +82,7 @@ public class DiaryController {
         }
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public String delete(@PathVariable long id) {
         try {
             long loginUserId = jwtService.getMemberId();
