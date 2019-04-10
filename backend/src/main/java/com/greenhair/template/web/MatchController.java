@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.greenhair.template.domain.ResponseVO;
-import com.greenhair.template.domain.matches.Match;
+import com.greenhair.template.domain.match.Match;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

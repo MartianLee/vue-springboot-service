@@ -12,9 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.deser.DataFormatReaders.Match;
 import com.greenhair.template.domain.BaseTimeEntity;
 import com.greenhair.template.domain.users.Users;
+import com.greenhair.template.domain.match.Match;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -46,7 +46,10 @@ public class Diary extends BaseTimeEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Users users;
 
-    // private Match match;
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "match_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Match match;
 
     @Builder
     public Diary(String title, String content, Users users) {
