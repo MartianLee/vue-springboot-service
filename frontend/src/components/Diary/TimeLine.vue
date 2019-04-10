@@ -9,23 +9,25 @@
       </button>
     </div>
     <hr>
-    <div v-for="(diary, index) in diaries" :key="diary.id">
-      <h3>
-        <router-link :to="{ path: `diary/${diary.id}`}">
-          {{ diaries.length - index }}. {{ diary.title }}
-        </router-link>
-      </h3>
-      <edit-buttons :id="diary.id"></edit-buttons>
-      <h4>
-        <!-- {{ diary.homeTeam.title }} vs {{ diary.awayTeam.title }} -->
-      </h4>
-      <h5>
-          {{ diary.modifiedDate }}
-      </h5>
-      <p>
-        {{ diary.content }}
-      <p>
-      <hr>
+    <div class="container">
+      <div v-for="(diary, index) in diaries" :key="diary.id">
+        <h3>
+          <router-link :to="{ path: `diary/${diary.id}`}">
+            {{ diaries.length - index }}. {{ diary.title }}
+          </router-link>
+        </h3>
+        <edit-buttons :id="diary.id"></edit-buttons>
+        <h4>
+          <!-- {{ diary.homeTeam.title }} vs {{ diary.awayTeam.title }} -->
+        </h4>
+        <h5>
+            {{ diary.modifiedDate }}
+        </h5>
+        <p>
+          {{ diary.content }}
+        <p>
+        <hr>
+      </div>
     </div>
   </div>
 </template>
@@ -63,4 +65,9 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  margin: 0 auto;
+  width: 60%;
+  text-align: left;
+}
 </style>

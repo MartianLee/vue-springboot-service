@@ -1,7 +1,7 @@
 <template>
-  <div class="Login">
+  <div class="login">
     <h2>Login</h2>
-    <div class="Login">
+    <div class="form-wrapper">
         <form class="login-form" v-on:submit.prevent="onLoginSubmit" method="POST">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
@@ -17,6 +17,11 @@
                 </div>
             </div>
             <input class="login-btn waves-effect waves-light btn" type="submit" value="Login" />
+            <button>
+              <router-link :to="{ name: 'SignUp'}">
+                  SignUp
+              </router-link>
+            </button>
         </form>
     </div>
   </div>
@@ -54,4 +59,15 @@ export default {
 </script>
 
 <style scoped>
+.form-wrapper {
+  margin: 0 auto;
+  width: 30%;
+  text-align: left;
+}
+input, button {
+  width: 100%;
+}
+label {
+  width: 100%;
+}
 </style>

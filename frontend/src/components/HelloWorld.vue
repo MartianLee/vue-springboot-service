@@ -5,11 +5,6 @@
     <h4>{{ msg }}</h4>
     <div v-show="loggedIn === false">
       <login></login>
-      <button>
-      <router-link :to="{ name: 'SignUp'}">
-          SignUp
-      </router-link>
-    </button>
     </div>
     <div v-show="loggedIn === true">
       <userInfo></userInfo>

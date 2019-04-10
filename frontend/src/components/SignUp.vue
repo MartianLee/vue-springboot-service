@@ -1,7 +1,7 @@
 <template>
   <div class="SignUp">
     <h1>SignUp</h1>
-    <div class="Login">
+    <div class="form-wrapper">
         <form class="signup-form" v-on:submit.prevent="onSignUpSubmit" method="POST">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
@@ -22,7 +22,7 @@
                 <input id="password" name="upw" type="password" class="validate" v-model="password"/>
                 </div>
             </div>
-            <input class="signup-btn waves-effect waves-light btn" type="submit" value="가입하기" />
+            <input class="signup-btn waves-effect waves-light btn" type="submit" value="Sign Up" />
         </form>
     </div>
   </div>
@@ -60,4 +60,18 @@ export default {
 </script>
 
 <style scoped>
+.form-wrapper {
+  margin: 0 auto;
+  width: 30%;
+  text-align: left;
+}
+.signup-btn {
+  margin-top: 20px;
+}
+input, button {
+  width: 100%;
+}
+label {
+  width: 100%;
+}
 </style>
