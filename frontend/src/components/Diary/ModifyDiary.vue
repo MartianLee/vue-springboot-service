@@ -16,6 +16,12 @@
                 <textarea id="content" name="uid" rows="6" class="validate" v-model="diary.content"/>
                 </div>
             </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <label for="match_id">Match_id</label>
+                  <input id="match_id" name="match_id" class="validate" v-model="match_id"/>
+                </div>
+            </div>
             <input class="diary-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
         </form>
     </div>

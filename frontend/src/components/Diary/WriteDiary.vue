@@ -6,14 +6,20 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
                 <div class="input-field col s12">
-                    <label for="title">Title</label>
-                <input id="title" name="title" type="title" class="validate" v-model="title"/>
+                  <label for="title">Title</label>
+                  <input id="title" name="title" type="title" class="validate" v-model="title"/>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                <label for="content">Content</label>
-                <textarea id="content" name="uid" rows="6" class="validate" v-model="content"/>
+                  <label for="content">Content</label>
+                  <textarea id="content" name="content" rows="6" class="validate" v-model="content"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                  <label for="match_id">Match_id</label>
+                  <input id="match_id" name="match_id" class="validate" v-model="match_id"/>
                 </div>
             </div>
             <input class="diary-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
@@ -29,7 +35,8 @@ export default {
   data () {
     return {
       title: '',
-      content: ''
+      content: '',
+      match_id: ''
     }
   },
   created () {
@@ -40,7 +47,8 @@ export default {
       if (token) {
         this.$http.post('/api/diary', {
           title: this.title,
-          content: this.content
+          content: this.content,
+          matchId: this.match_id
         },
         {
           headers: {

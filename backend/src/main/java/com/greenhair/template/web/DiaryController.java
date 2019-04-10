@@ -10,8 +10,11 @@ import java.util.Optional;
 import com.greenhair.template.domain.ResponseVO;
 import com.greenhair.template.domain.diaries.Diary;
 import com.greenhair.template.domain.diaries.DiaryRepository;
+import com.greenhair.template.domain.match.Match;
+import com.greenhair.template.domain.match.MatchRepository;
 import com.greenhair.template.domain.users.Users;
 import com.greenhair.template.domain.users.UsersRepository;
+import com.greenhair.template.dto.diary.DiaryDto;
 import com.greenhair.template.service.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,9 @@ public class DiaryController {
 
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private MatchRepository matchRepository;
 
     @Autowired
     private JwtService jwtService;
@@ -53,12 +59,16 @@ public class DiaryController {
     }
 
     @PostMapping
-    public String create(@RequestBody Diary diary) {
+    public String create(@RequestBody DiaryDto diary) {
         try {
+            System.out.println(diary.getTitle());
+            System.out.println(diary.getContent());
+            System.out.println(diary.getMatchId());
             long loginUserId = jwtService.getMemberId();
             Optional<Users> loginUsers = usersRepository.findById(loginUserId);
-            diary.setUsers(loginUsers.get());
-            diaryRepository.save(diary);
+            Optional<Match> match = matchRepository.findById(diary.getMatchId());
+            diaryRepository.save(Diary.builder().title(diary.getTitle()).content(diary.getContent())
+                .users(loginUsers.get()).match(match.get()).build());
             return "success";
         } catch(Exception e) {
             return "falied";

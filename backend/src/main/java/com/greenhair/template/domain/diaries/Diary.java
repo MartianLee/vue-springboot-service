@@ -52,9 +52,10 @@ public class Diary extends BaseTimeEntity {
     private Match match;
 
     @Builder
-    public Diary(String title, String content, Users users) {
+    public Diary(String title, String content, Users users, Match match) {
         this.title = title;
         this.content = content;
         this.users = users;
+        this.match = match;
     }
 }
