@@ -48,7 +48,6 @@ export default {
         password: this.password
       }).then(res => {
         window.$cookies.set('FootballDiary', res.data, '2d')
-        console.log(res.data)
         location.reload()
       }, () => {
         console.log('failed')

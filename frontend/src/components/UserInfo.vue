@@ -12,26 +12,19 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'UserInfo',
   data () {
     return {
-      msg: 'Welcome to Your SpringBoot + Vue.js App',
-      user: {}
+      msg: 'Welcome to Your SpringBoot + Vue.js App'
     }
   },
-  created () {
-    let token = window.$cookies.get('FootballDiary')
-    if (token) {
-      this.$http.get('/api/users', {
-        headers: {
-          Authorization: 'Bearer ' + token // the token is a variable which holds the token
-        }
-      }).then((resp) => {
-        console.log(resp.data)
-        this.user = resp.data
-      })
-    }
+  computed: {
+    ...mapState([
+      'user'
+    ])
   }
 }
 </script>

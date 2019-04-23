@@ -43,8 +43,6 @@ export default {
   },
   methods: {
     onSignUpSubmit: function () {
-      console.log(window.$router)
-      console.log(this.$router)
       this.$http.post('/api/users/create', {
         email: this.email,
         name: this.name,

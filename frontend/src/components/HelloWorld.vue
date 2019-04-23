@@ -3,10 +3,10 @@
     <h1>Match Log</h1>
     <h3>Archive and share your own diary of your best sports match!</h3>
     <h4>{{ msg }}</h4>
-    <div v-show="loggedIn === false">
+    <div v-show="isloggedIn === false">
       <login></login>
     </div>
-    <div v-show="loggedIn === true">
+    <div v-show="isloggedIn === true">
       <userInfo></userInfo>
       <button v-on:click="onLogout">
         Logout
@@ -24,6 +24,7 @@
 <script>
 import Login from './Login.vue'
 import UserInfo from './UserInfo.vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'HelloWorld',
@@ -34,33 +35,22 @@ export default {
   data () {
     return {
       msg: 'Developed by MartianLee with SpringBoot + Vue.js',
-      loggedIn: false,
       user: {}
     }
   },
   created () {
     let token = window.$cookies.get('FootballDiary')
-    if (token) {
-      this.$http.get('/api/users', {
-        headers: {
-          Authorization: 'Bearer ' + token // the token is a variable which holds the token
-        }
-      }).then((resp) => {
-        console.log(resp.data)
-        this.loggedIn = true
-        this.user = resp.data
-      }, (resp) => {
-        window.$cookies.remove('FootballDiary')
-        this.loggedIn = false
-        console.log(this.loggedIn)
-        console.log('error')
-      })
-    }
+    this.$store.commit('setToken', token)
+    this.$store.dispatch('getUserFromServer')
+  },
+  computed: {
+    ...mapGetters([
+      'isloggedIn'
+    ])
   },
   methods: {
     onLogout: function () {
       window.$cookies.remove('FootballDiary')
-      this.loggedIn = false
       this.$router.push('/')
     }
   }
