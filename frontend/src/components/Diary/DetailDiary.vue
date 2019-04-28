@@ -1,6 +1,7 @@
 <template>
   <div class="DetailDiary">
     <h1>{{ diary.title }}</h1>
+    <h2> {{ diary.match.homeTeam.name }}({{ diary.match.goalsHomeTeam }}) vs {{diary.match.awayTeam.name}}({{ diary.match.goalsAwayTeam }}) </h2>
     <h3>Written by {{ diary.users.name }} at {{diary.modifiedDate}} </h3>
     <router-link :to="{ path: 'modify' }" append>
         Modify
@@ -20,6 +21,10 @@ export default {
       diary: {
         users: {
           name: ''
+        },
+        match: {
+          homeTeam: {},
+          awayTeam: {}
         },
         modifiedDate: ''
       }

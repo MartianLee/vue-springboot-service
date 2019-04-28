@@ -11,12 +11,6 @@
       <button v-on:click="onLogout">
         Logout
       </button>
-      <router-link :to="{ name: 'UserInfo'}">
-          UserInfo
-      </router-link>
-      <router-link :to="{ path: 'diary'}">
-          TimeLine
-      </router-link>
     </div>
   </div>
 </template>
@@ -40,8 +34,12 @@ export default {
   },
   created () {
     let token = window.$cookies.get('FootballDiary')
-    this.$store.commit('setToken', token)
-    this.$store.dispatch('getUserFromServer')
+    if (token) {
+      this.$store.commit('setToken', token)
+      this.$store.dispatch('getUserFromServer')
+    } else {
+      this.onLogout()
+    }
   },
   computed: {
     ...mapGetters([
@@ -50,6 +48,7 @@ export default {
   },
   methods: {
     onLogout: function () {
+      this.$store.commit('logout')
       window.$cookies.remove('FootballDiary')
       this.$router.push('/')
     }

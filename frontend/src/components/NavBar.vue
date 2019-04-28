@@ -8,7 +8,22 @@
         </li>
         <li>
             <router-link :to="{ path: '/diary'}">
+                Calendar
+            </router-link>
+        </li>
+        <li>
+            <router-link :to="{ path: '/diary'}">
                 Diaries
+            </router-link>
+        </li>
+        <li>
+            <router-link :to="{ path: '/match'}">
+                Matches
+            </router-link>
+        </li>
+        <li>
+            <router-link :to="{ path: '/userInfo'}">
+                Setting
             </router-link>
         </li>
         <li>

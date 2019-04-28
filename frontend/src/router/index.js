@@ -11,6 +11,7 @@ import DetailDiary from '@/components/Diary/DetailDiary'
 import ModifyDiary from '@/components/Diary/ModifyDiary'
 import DiaryHome from '@/components/Diary/DiaryHome'
 import editDiaryButtons from '@/components/Diary/Buttons'
+import MatchHome from '@/components/Match/Home'
 
 Vue.use(Router)
 
@@ -68,6 +69,10 @@ export default new Router({
       path: 'editButtons',
       name: 'editButtons',
       component: editDiaryButtons
+    },
+    {
+      path: '/match',
+      component: MatchHome
     }
   ]
 })

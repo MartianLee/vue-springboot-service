@@ -39,7 +39,6 @@ export default {
   name: 'TimeLine',
   data () {
     return {
-      msg: 'Welcome to Your SpringBoot + Vue.js App',
       user: {},
       diaries: []
     }

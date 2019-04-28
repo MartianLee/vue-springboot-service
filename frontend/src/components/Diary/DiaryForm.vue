@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onSubmit: function () {
-          console.log(diary);
+      console.log(diary);
     }
   }
 }
