@@ -3,7 +3,6 @@ package com.greenhair.template.web;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,9 +60,6 @@ public class DiaryController {
     @PostMapping
     public String create(@RequestBody DiaryDto diary) {
         try {
-            System.out.println(diary.getTitle());
-            System.out.println(diary.getContent());
-            System.out.println(diary.getMatchId());
             long loginUserId = jwtService.getMemberId();
             Optional<Users> loginUsers = usersRepository.findById(loginUserId);
             Optional<Match> match = matchRepository.findById(diary.getMatchId());
