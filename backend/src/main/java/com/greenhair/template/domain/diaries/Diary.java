@@ -1,7 +1,5 @@
 package com.greenhair.template.domain.diaries;
 
-import java.util.Optional;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.greenhair.template.domain.BaseTimeEntity;
 import com.greenhair.template.domain.users.Users;
 import com.greenhair.template.domain.match.Match;
@@ -50,6 +47,8 @@ public class Diary extends BaseTimeEntity {
     @JoinColumn(name = "match_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Match match;
+
+    private int seen;
 
     @Builder
     public Diary(String title, String content, Users users, Match match) {

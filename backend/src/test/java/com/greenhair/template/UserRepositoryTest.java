@@ -75,7 +75,9 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void testUsers() {
-		Optional<Users> result = usersRepository.findById(85L);
+        Optional<Users> result = usersRepository.findById(85L);
+        Users user = result.get();
+        System.out.println(user.getName());
 		// result.ifPresent(member -> log.info("member " + member));
     }
     
