@@ -1,6 +1,7 @@
 package com.greenhair.template.service;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
@@ -37,17 +38,39 @@ public class TeamServiceImpl implements TeamService {
 	    this.apiConfig = apiConfig;
 	}
     
+    private void saveTeam(String contentOfTeam) {
+        Gson gson = new Gson();
+        Type listType = new TypeToken<Map<String, Object>>() {}.getType();
+        Map<String, Object> mapOfTeam = gson.fromJson(contentOfTeam.toString(), listType);
+        Map<String, Object> m = (Map<String, Object>)((Map<String, Object>) mapOfTeam.get("api")).get("teams");
+        m.entrySet().forEach((item) -> {
+            LinkedTreeMap value = (LinkedTreeMap) item.getValue();                
+            long id = Long.parseLong(item.getKey());
+            Team newTeam = Team.builder()
+            .id(id)
+            .name(value.get("name").toString())
+            .league((League) (leagueRepository.findById(EPL_LEAGUE_CODE).get()))
+            .stadium("asdf")
+            .build();
+            teamRepository.save(newTeam);
+        });
+    }
+
+    private HttpURLConnection setConnection(URL url) throws IOException{
+        HttpURLConnection connectionOfTeam = (HttpURLConnection) url.openConnection();
+        connectionOfTeam.setRequestProperty("Content-Type", this.apiConfig.getContentsType());
+        connectionOfTeam.setRequestProperty("X-RapidAPI-Host", this.apiConfig.getHost());
+        connectionOfTeam.setRequestProperty("X-RapidAPI-Key", this.apiConfig.getKey());
+        connectionOfTeam.setConnectTimeout(this.apiConfig.getConnectionTime());
+        connectionOfTeam.setRequestMethod("GET");
+        return connectionOfTeam;
+    }
+
     @Override
     public boolean loadFromApi(long league) {
         try {
-            // Doing some job : refreshing
             URL urlOfTeam = new URL(this.apiConfig.getTeamUrl() + league);
-            HttpURLConnection connectionOfTeam = (HttpURLConnection) urlOfTeam.openConnection();
-            connectionOfTeam.setRequestProperty("Content-Type", this.apiConfig.getContentsType());
-            connectionOfTeam.setRequestProperty("X-RapidAPI-Host", this.apiConfig.getHost());
-            connectionOfTeam.setRequestProperty("X-RapidAPI-Key", this.apiConfig.getKey());
-            connectionOfTeam.setConnectTimeout(10000);
-            connectionOfTeam.setRequestMethod("GET");
+            HttpURLConnection connectionOfTeam = setConnection(urlOfTeam);
 
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(connectionOfTeam.getInputStream()));
@@ -57,21 +80,7 @@ public class TeamServiceImpl implements TeamService {
                 contentOfTeam.append(inputLine);
             }
             
-            Gson gson = new Gson();
-            Type listType = new TypeToken<Map<String, Object>>() {}.getType();
-            Map<String, Object> mapOfTeam = gson.fromJson(contentOfTeam.toString(), listType);
-            Map<String, Object> m = (Map<String, Object>)((Map<String, Object>) mapOfTeam.get("api")).get("teams");
-            m.entrySet().forEach((item) -> {
-                LinkedTreeMap value = (LinkedTreeMap) item.getValue();                
-                long id = Long.parseLong(item.getKey());
-                Team newTeam = Team.builder()
-                .id(id)
-                .name(value.get("name").toString())
-                .league((League) (leagueRepository.findById(EPL_LEAGUE_CODE).get()))
-                .stadium("asdf")
-                .build();
-                teamRepository.save(newTeam);
-            });
+            saveTeam(contentOfTeam.toString());
 
             in.close();
             connectionOfTeam.disconnect();

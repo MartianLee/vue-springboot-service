@@ -17,5 +17,6 @@ public class ApiConfig {
     private String key;
     private String teamUrl;
     private String matchUrl;
+    private int connectionTime;
 
 }
