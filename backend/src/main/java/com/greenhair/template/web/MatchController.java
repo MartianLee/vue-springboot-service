@@ -85,9 +85,7 @@ public class MatchController {
     @GetMapping("/refresh")
     public String refresh(String season) {
         try {
-            if(!matchService.loadFromApi(EPL_LEAGUE_CODE)){
-                return "failed";
-            }
+            matchService.loadFromApi(EPL_LEAGUE_CODE);
             System.out.println("Match Loaded");
             return "success";
         } catch(Exception e) {

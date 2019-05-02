@@ -25,6 +25,7 @@ import com.greenhair.template.domain.match.Match;
 import com.greenhair.template.domain.match.MatchRepository;
 import com.greenhair.template.domain.team.Team;
 import com.greenhair.template.domain.team.TeamRepository;
+import com.greenhair.template.util.ConnectionHelper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,6 +50,9 @@ public class MatchServiceImpl implements MatchService{
     @Autowired
     private TeamService teamService;
 
+    @Autowired
+    private ConnectionHelper connectionHelper;
+
     private final ApiConfig apiConfig;
 
     @Autowired
@@ -59,10 +63,10 @@ public class MatchServiceImpl implements MatchService{
     private void saveMatch(String contentOfMatch){
         Gson gson = new Gson();
         Type listType = new TypeToken<Map<String, Object>>() {}.getType();
-        Map<String, Object> mapOfMatches = gson.fromJson(contentOfMatch.toString(), listType);
-        Map<String, Object> m = (Map<String, Object>)((Map<String, Object>) mapOfMatches.get("api")).get("fixtures");
+        Map<String, Object> mapOfResponse = gson.fromJson(contentOfMatch.toString(), listType);
+        Map<String, Object> mapOfMatches = (Map<String, Object>)((Map<String, Object>) mapOfResponse.get("api")).get("fixtures");
 
-        m.entrySet().forEach((item) -> {
+        mapOfMatches.entrySet().forEach((item) -> {
             System.out.println(item);
             LinkedTreeMap value = (LinkedTreeMap) item.getValue();
             long leagueId = Long.parseLong(value.get("league_id").toString());
@@ -98,30 +102,19 @@ public class MatchServiceImpl implements MatchService{
     }
 
     @Override
-    public boolean loadFromApi(long league) {
-        if(!teamService.loadFromApi(league)){
-            return false;
-        }
+    public void loadFromApi(long league) {
         try {
-            URL urlOfMatch = new URL(this.apiConfig.getTeamUrl() + league);
-            HttpURLConnection connectionOfMatch = setConnection(urlOfMatch);
+            teamService.loadFromApi(league);
+            
+            HttpURLConnection connectionOfMatch = setConnection(new URL(this.apiConfig.getTeamUrl() + league));
 
-            BufferedReader bufferMatch = new BufferedReader(
-                new InputStreamReader(connectionOfMatch.getInputStream()));
-            String inputLineOfMatch;
-            StringBuffer contentOfMatch = new StringBuffer();
-            while ((inputLineOfMatch = bufferMatch.readLine()) != null) {
-                contentOfMatch.append(inputLineOfMatch);
-            }
+            StringBuffer contentOfMatch = connectionHelper.getContentfromConnection(connectionOfMatch);
             
             saveMatch(contentOfMatch.toString());
 
-            bufferMatch.close();
             connectionOfMatch.disconnect();
-            return true;
         } catch(Exception e) {
             System.out.println(e);
-            return false;
         }
     }
     

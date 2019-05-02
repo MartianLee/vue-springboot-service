@@ -31,6 +31,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('com.google.code.gson:gson:2.8.5')
+    implementation('org.modelmapper:modelmapper:2.3.0')
 	compile('org.springframework.boot:spring-boot-starter-security')
     compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 	compileOnly 'org.projectlombok:lombok'

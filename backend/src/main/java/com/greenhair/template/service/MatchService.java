@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface MatchService {
 
-    boolean loadFromApi(long league_id);
+    void loadFromApi(long league_id);
 }
