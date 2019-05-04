@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.greenhair.template.domain.ResponseVO;
+import com.greenhair.template.domain.users.LoginVO;
 import com.greenhair.template.domain.users.Users;
 import com.greenhair.template.domain.users.UsersRepository;
+import com.greenhair.template.dto.users.UserDto;
 import com.greenhair.template.service.JwtService;
 import com.greenhair.template.service.UsersService;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -37,11 +38,14 @@ public class UsersController {
     @Autowired
     private JwtService jwtService;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping
-    public Users getUser() {
+    public LoginVO getUser() {
         long memberId = jwtService.getMemberId();
         Optional<Users> loginUsers = userRepository.findById(memberId);
-        return loginUsers.get();
+        return modelMapper.map(loginUsers.get(), LoginVO.class);
     }
 
     @GetMapping("{id}")

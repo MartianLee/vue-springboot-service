@@ -1,5 +1,7 @@
 package com.greenhair.template.domain.users;
 
+import com.greenhair.template.domain.BaseTimeEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginVo {
+public class LoginVO extends BaseTimeEntity {
     private String email;
-    private String password;
+    private String name;
 }
