@@ -29,12 +29,17 @@
 </template>
 
 <script>
+import Buttons from './Buttons.vue'
+
 export default {
   name: 'MatchHome',
   data () {
     return {
       matches: []
     }
+  },
+  components: {
+    'edit-buttons': Buttons
   },
   created () {
     let token = window.$cookies.get('FootballDiary')

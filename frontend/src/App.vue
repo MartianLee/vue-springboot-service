@@ -1,19 +1,25 @@
 <template>
-  <div id="app">
+  <v-app>
+    <!-- <nav-drawer></nav-drawer> -->
     <nav-bar></nav-bar>
-    <img class="logo" src="/static/images/spring-boot-logo.png">
-    <img class="logo" src="/static/images/logo.png">
-    <router-view/>
-  </div>
+    <v-content>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+    <v-footer app></v-footer>
+  </v-app>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
+import NavDrawer from './components/NavDrawer.vue'
 
 export default {
   name: 'App',
   components: {
-    'nav-bar': NavBar
+    'nav-bar': NavBar,
+    'nav-drawer': NavDrawer
   }
 }
 </script>
@@ -25,7 +31,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .logo {
   width: 12vw;

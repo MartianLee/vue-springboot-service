@@ -8,9 +8,9 @@
     </div>
     <div v-show="isloggedIn === true">
       <userInfo></userInfo>
-      <button v-on:click="onLogout">
+      <v-btn v-on:click="onLogout">
         Logout
-      </button>
+      </v-btn>
     </div>
   </div>
 </template>

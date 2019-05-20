@@ -17,12 +17,12 @@
                 </div>
             </div>
             <input class="login-btn waves-effect waves-light btn" type="submit" value="Login" />
-            <button>
-              <router-link :to="{ name: 'SignUp'}">
-                  SignUp
-              </router-link>
-            </button>
         </form>
+        <router-link :to="{ name: 'SignUp'}">
+          <v-btn>
+            SignUp
+          </v-btn>
+        </router-link>
     </div>
   </div>
 </template>

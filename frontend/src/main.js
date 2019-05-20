@@ -7,11 +7,15 @@ import router from './router'
 import axios from 'axios'
 import VueCookie from 'vue-cookies'
 import store from './store'
+// CSS Library
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 Vue.use(VueCookie)
 Vue.use(Vuex)
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({

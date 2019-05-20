@@ -1,7 +1,7 @@
 <template>
   <div class="ModifyDiary">
-    <v-btn v-on:click="onModify"> modify </v-btn>
-    <v-btn v-on:click="onDelete"> delete </v-btn>
+    <button v-on:click="onModify"> modify </button>
+    <button v-on:click="onDelete"> delete </button>
   </div>
 </template>
 
@@ -20,12 +20,12 @@ export default {
   },
   methods: {
     onModify: function () {
-      this.$router.push(`/diary/${this.id}/modify`)
+      this.$router.push(`/match/${this.id}/modify`)
     },
     onDelete: function () {
       let token = window.$cookies.get('FootballDiary')
       if (token) {
-        this.$http.delete(`/api/diary/${this.id}`,
+        this.$http.delete(`/api/match/${this.id}`,
           {
             headers: {
               Authorization: 'Bearer ' + token, // the token is a variable which holds the token
@@ -35,7 +35,7 @@ export default {
             console.log('failed')
           }).then(res => {
           location.reload()
-          this.$router.push('/diary')
+          this.$router.push('/match')
         })
       }
     }
