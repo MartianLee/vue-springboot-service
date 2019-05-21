@@ -1,24 +1,26 @@
 <template>
   <v-app>
     <!-- <nav-drawer></nav-drawer> -->
+    <nav-bar-top></nav-bar-top>
     <nav-bar></nav-bar>
-    <v-content>
+    <v-content class="content">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer app></v-footer>
   </v-app>
 </template>
 
 <script>
 import NavBar from './components/NavBar.vue'
+import NavBarTop from './components/NavBarTop.vue'
 import NavDrawer from './components/NavDrawer.vue'
 
 export default {
   name: 'App',
   components: {
     'nav-bar': NavBar,
+    'nav-bar-top': NavBarTop,
     'nav-drawer': NavDrawer
   }
 }
@@ -31,6 +33,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.content {
+  margin-top: 56px;
 }
 .logo {
   width: 12vw;
