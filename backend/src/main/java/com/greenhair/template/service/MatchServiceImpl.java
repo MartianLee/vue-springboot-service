@@ -106,7 +106,7 @@ public class MatchServiceImpl implements MatchService{
         try {
             teamService.loadFromApi(league);
             
-            HttpURLConnection connectionOfMatch = setConnection(new URL(this.apiConfig.getTeamUrl() + league));
+            HttpURLConnection connectionOfMatch = setConnection(new URL(this.apiConfig.getMatchUrl() + league));
 
             StringBuffer contentOfMatch = connectionHelper.getContentfromConnection(connectionOfMatch);
             

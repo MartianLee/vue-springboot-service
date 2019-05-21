@@ -39,7 +39,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MatchController {
 
     private HashMap<String, String> footballApi = new HashMap<String, String>();
-    public static long EPL_LEAGUE_CODE = 2;
 
     @Autowired
     private MatchRepository matchRepository;
@@ -82,10 +81,10 @@ public class MatchController {
         }
     }
     
-    @GetMapping("/refresh")
-    public String refresh(String season) {
+    @GetMapping("/refresh/{id}")
+    public String refresh(@PathVariable long id, String season) {
         try {
-            matchService.loadFromApi(EPL_LEAGUE_CODE);
+            matchService.loadFromApi(id);
             System.out.println("Match Loaded");
             return "success";
         } catch(Exception e) {
@@ -96,7 +95,7 @@ public class MatchController {
     public static void main(String args[]) {
         
         MatchController mc = new MatchController();
-        mc.refresh("asdfasdf");
+        mc.refresh(2, "asdfasdf");
         System.out.println();
     } 
 }
