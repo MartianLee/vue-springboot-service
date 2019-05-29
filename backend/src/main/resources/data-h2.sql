@@ -1,5 +1,5 @@
-insert into users (email, name, password, created_date, modified_date) values ('test1@gmail.com', 'admin1',  '12345', now(), now());
-insert into users (email, name, password, created_date, modified_date) values ('test2@gmail.com', 'admin2',  '12345', now(), now());
+insert into users (email, name, password, position, point, created_date, modified_date) values ('test1@gmail.com', 'admin1', 1,  '12345', 0, now(), now());
+insert into users (email, name, password, position, point, created_date, modified_date) values ('test2@gmail.com', 'admin2', 1,  '12345', 0, now(), now());
 
 insert into league (id, name, created_date, modified_date) values (2, 'English Premier League', now(), now());
 insert into league (id, name, created_date, modified_date) values (8, 'Bundesliga 1', now(), now());

@@ -57,13 +57,23 @@ public class Users extends BaseTimeEntity implements Serializable {
     //             mappedBy = "users",
     //             orphanRemoval = true) // FetchType.LAZY도 있음
 	// @JoinColumn(name="user_id")
-	// private List<Diary> diaries = new ArrayList<>();
+    // private List<Diary> diaries = new ArrayList<>();
+    
+    @Column(nullable = false)
+    @JsonProperty
+    private int point = 0;
+
+    @Column(nullable = false)
+    @JsonProperty
+    private int position = 0;
 
     @Builder
     public Users(String email, String password, String name) {
         this.email = email;
         this.password = password;
         this.name = name;
+        this.point = 0;
+        this.position = 1;
     }
     
 }
