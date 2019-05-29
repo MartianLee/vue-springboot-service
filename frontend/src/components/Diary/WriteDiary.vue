@@ -178,6 +178,8 @@ export default {
         }, () => {
           console.log('failed')
         }).then(res => {
+          this.$store.dispatch('getLogById')
+        }).then(res => {
           this.$router.push('/diary')
         })
       }

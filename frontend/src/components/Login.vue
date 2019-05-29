@@ -4,19 +4,21 @@
     <div class="form-wrapper">
         <form class="login-form" v-on:submit.prevent="onLoginSubmit" method="POST">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            <div class="row">
-                <div class="input-field col s12">
-                  <label for="email">Email</label>
-                  <input id="email" name="uemail" type="email" class="validate" v-model="email" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <label for="password">Password</label>
-                  <input id="password" name="upw" type="password" class="validate" v-model="password" />
-                </div>
-            </div>
-            <input class="login-btn waves-effect waves-light btn" type="submit" value="Login" />
+            <v-text-field
+              v-model="email"
+              :counter="100"
+              label="Email"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              :counter="20"
+              :rules="[rules.required, rules.min]"
+              :type="password"
+              label="Password"
+              required
+            ></v-text-field>
+            <v-btn type="submit">Login</v-btn>
         </form>
         <router-link :to="{ name: 'SignUp'}">
           <v-btn>
@@ -36,7 +38,12 @@ export default {
     return {
       token: '',
       email: '',
-      password: ''
+      password: '',
+      rules: {
+        required: value => !!value || 'Required.',
+        min: v => v.length >= 4 || 'Min 4 characters',
+        emailMatch: () => ('The email and password you entered don\'t match')
+      }
     }
   },
   created () {
@@ -60,7 +67,7 @@ export default {
 <style scoped>
 .form-wrapper {
   margin: 0 auto;
-  width: 30%;
+  width: 60%;
   text-align: left;
 }
 input, button {

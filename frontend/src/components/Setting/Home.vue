@@ -3,10 +3,12 @@
     <img class="logo" src="/static/images/spring-boot-logo.png">
     <img class="logo" src="/static/images/logo.png">
     <h4>{{ msg }}</h4>
+    <user-info></user-info>
   </div>
 </template>
 
 <script>
+import UserInfo from '../User/UserInfo.vue'
 
 export default {
   name: 'SettingHome',
@@ -16,6 +18,9 @@ export default {
     }
   },
   created () {
+  },
+  components: {
+    'user-info': UserInfo
   },
   methods: {
   }

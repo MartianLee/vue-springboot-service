@@ -3,6 +3,7 @@
     <h2>User Info</h2>
     <h4>{{user.name}} : {{user.email}} </h4>
     <h4>joined date : {{user.createdDate}} </h4>
+    <h4>point : {{ user.point }} </h4>
     <!-- <h3 v-for="(user, index) in users" :key="user.id">
       <router-link :to="{ name: 'DetailUser', params: { id: index }}">
         {{user.name}} : {{user.email}}
