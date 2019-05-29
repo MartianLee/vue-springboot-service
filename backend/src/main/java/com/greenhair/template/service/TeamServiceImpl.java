@@ -42,7 +42,7 @@ public class TeamServiceImpl implements TeamService {
 	    this.apiConfig = apiConfig;
 	}
     
-    private void saveTeamFromContent(String contentOfTeam) {
+    private void saveTeamFromContent(String contentOfTeam, long league) {
         Gson gson = new Gson();
         Type listType = new TypeToken<Map<String, Object>>() {}.getType();
         Map<String, Object> mapOfResponse = gson.fromJson(contentOfTeam.toString(), listType);
@@ -53,7 +53,7 @@ public class TeamServiceImpl implements TeamService {
             Team newTeam = Team.builder()
             .id(id)
             .name(value.get("name").toString())
-            .league((League) (leagueRepository.findById(EPL_LEAGUE_CODE).get()))
+            .league((League) (leagueRepository.findById(league).get()))
             .stadium("asdf")
             .build();
             teamRepository.save(newTeam);
@@ -77,7 +77,7 @@ public class TeamServiceImpl implements TeamService {
             
             StringBuffer contentOfTeam = connectionHelper.getContentfromConnection(connectionOfTeam);
             
-            saveTeamFromContent(contentOfTeam.toString());
+            saveTeamFromContent(contentOfTeam.toString(), league);
 
             connectionOfTeam.disconnect();
 

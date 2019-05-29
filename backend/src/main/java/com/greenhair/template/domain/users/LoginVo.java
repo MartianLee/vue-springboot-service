@@ -14,6 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginVO extends BaseTimeEntity {
+    private Long id;
     private String email;
     private String name;
 }
