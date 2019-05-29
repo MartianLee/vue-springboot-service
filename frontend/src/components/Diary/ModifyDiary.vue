@@ -2,7 +2,7 @@
   <div class="ModifyDiary">
     <h1>Modify Diary</h1>
     <div class="diary">
-        <form class="diary-form" v-on:submit.prevent="onCreateDiary" method="PUT">
+        <v-form class="diary-form" v-on:submit.prevent="onCreateDiary" method="PUT">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <div class="row">
                 <div class="input-field col s12">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <input class="diary-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
-        </form>
+        </v-form>
     </div>
   </div>
 </template>

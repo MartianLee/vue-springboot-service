@@ -36,6 +36,7 @@ export default {
 }
 .content {
   margin-top: 56px;
+  margin-bottom: 56px;
 }
 .logo {
   width: 12vw;

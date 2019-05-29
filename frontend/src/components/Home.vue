@@ -1,35 +1,56 @@
 <template>
-  <div class="hello">
-    <h1>Match Log</h1>
-    <h3>Archive and share your own diary of your best sports match!</h3>
-    <h4>{{ msg }}</h4>
+  <div class="home">
+    <div class="header">
+      <v-container bg fill-height grid-list-md text-xs-center>
+        <v-layout row wrap align-center>
+          <v-flex>
+            <h1>Match Log</h1>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
+    <div class="sub-header">
+      <v-container bg fill-height grid-list-md text-xs-center>
+        <v-layout row wrap align-center>
+          <v-flex>
+            <h3>Archive and share your own log of your best sports match!</h3>
+            <h3>내가 관람한 스포츠 경기 기록을 모으고 공유해 보세요!</h3>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
     <div v-show="isloggedIn === false">
       <login></login>
     </div>
     <div v-show="isloggedIn === true">
-      <userInfo></userInfo>
+      {{user.name}}님 안녕하세요!
       <v-btn v-on:click="onLogout">
         Logout
       </v-btn>
     </div>
+    <h2>Upcoming Matches</h2>
+    <h2>My Recent Logs</h2>
+    <my-log-component></my-log-component>
+    <h2>Log Timeline</h2>
+    <log-timeline></log-timeline>
   </div>
 </template>
 
 <script>
 import Login from './Login.vue'
-import UserInfo from './UserInfo.vue'
-import { mapGetters } from 'vuex'
+import LogTimeline from './Diary/LogTimeline.vue'
+import MyLogComponent from './Diary/MyLogComponent.vue'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'HelloWorld',
   components: {
     'login': Login,
-    'userInfo': UserInfo
+    'logTimeline': LogTimeline,
+    'my-log-component': MyLogComponent
   },
   data () {
     return {
-      msg: 'Developed by MartianLee with SpringBoot + Vue.js',
-      user: {}
     }
   },
   created () {
@@ -44,6 +65,9 @@ export default {
   computed: {
     ...mapGetters([
       'isloggedIn'
+    ]),
+    ...mapState([
+      'user'
     ])
   },
   methods: {
@@ -58,8 +82,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home {
+  margin-bottom: 60px;
+}
+.header {
+  height: 30vh;
+}
+.sub-header {
+  text-align: left;
+}
 h1 {
-  font-size: 3.5em;
+  font-size: 4em;
 }
 h1, h2 {
   font-weight: normal;

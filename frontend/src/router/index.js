@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import NavBar from '@/components/NavBar'
 import SignUp from '@/components/SignUp'
 import Login from '@/components/Login'
-import UserInfo from '@/components/UserInfo'
+import UserInfo from '@/components/User/UserInfo'
 import TimeLine from '@/components/Diary/TimeLine'
 import WriteDiary from '@/components/Diary/WriteDiary'
 import DetailDiary from '@/components/Diary/DetailDiary'
@@ -12,6 +12,7 @@ import ModifyDiary from '@/components/Diary/ModifyDiary'
 import DiaryHome from '@/components/Diary/DiaryHome'
 import editDiaryButtons from '@/components/Diary/Buttons'
 import MatchHome from '@/components/Match/Home'
+import SettingHome from '@/components/Setting/Home'
 
 Vue.use(Router)
 
@@ -56,6 +57,10 @@ export default new Router({
           component: WriteDiary
         },
         {
+          path: 'write/:id',
+          component: WriteDiary
+        },
+        {
           path: ':id',
           component: DetailDiary
         },
@@ -73,6 +78,10 @@ export default new Router({
     {
       path: '/match',
       component: MatchHome
+    },
+    {
+      path: '/setting',
+      component: SettingHome
     }
   ]
 })

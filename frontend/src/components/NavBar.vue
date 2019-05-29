@@ -2,13 +2,14 @@
   <v-bottom-nav
     :active.sync="bottomNav"
     :value="true"
-    color="transparent"
+    color="white"
     fixed
     >
     <v-btn
         color="teal"
         flat
-        value="recent"
+        value="home"
+        v-on:click="onNavHome"
     >
         <span>Home</span>
         <v-icon>home</v-icon>
@@ -17,27 +18,30 @@
     <v-btn
         color="teal"
         flat
-        value="favorites"
+        value="calendar"
+        v-on:click="onNavCalendar"
     >
         <span>Calendar</span>
-        <v-icon>calendar</v-icon>
+        <v-icon>event</v-icon>
     </v-btn>
 
     <v-btn
         color="teal"
         flat
-        value="nearby"
+        value="log"
+        v-on:click="onNavLog"
     >
         <span>Log</span>
-        <v-icon>log</v-icon>
+        <v-icon>inbox</v-icon>
     </v-btn>
     <v-btn
         color="teal"
         flat
         value="setting"
+        v-on:click="onNavSetting"
     >
         <span>Setting</span>
-        <v-icon>setting</v-icon>
+        <v-icon>settings</v-icon>
     </v-btn>
     </v-bottom-nav>
 </template>
@@ -47,10 +51,24 @@ export default {
   name: 'NavBar',
   data () {
     return {
-      user: {}
+      bottomNav: 'home'
     }
   },
   created () {
+  },
+  methods: {
+    onNavHome: function () {
+      this.$router.push('/')
+    },
+    onNavCalendar: function () {
+      this.$router.push('/match')
+    },
+    onNavLog: function () {
+      this.$router.push('/diary')
+    },
+    onNavSetting: function () {
+      this.$router.push('/setting')
+    }
   }
 }
 </script>

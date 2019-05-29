@@ -16,7 +16,9 @@
                 <textarea id="content" name="uid" rows="6" class="validate" v-model="diary.content"/>
                 </div>
             </div>
-            <input class="signup-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
+            <v-btn>
+              <input class="signup-btn waves-effect waves-light btn" type="submit" value="글쓰기" />
+            </v-btn>
         </form>
     </div>
   </div>

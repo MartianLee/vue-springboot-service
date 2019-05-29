@@ -44,4 +44,9 @@ export default {
 </script>
 
 <style scoped>
+button {
+  font-size: 0.8rem;
+  height: 100%;
+  padding: 5px;
+}
 </style>

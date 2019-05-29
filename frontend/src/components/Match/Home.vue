@@ -2,10 +2,16 @@
   <div class="TimeLine">
     <h2>Matches</h2>
     <div class="text-right">
-      <v-btn v-on:click="refreshMatch(2)">
+      <v-btn :loading="loading"
+        :disabled="loading"
+        color="secondary"
+        v-on:click="refreshMatch(2)">
         refresh EPL Matches
       </v-btn>
-      <v-btn v-on:click="refreshMatch(87)">
+      <v-btn :loading="loading"
+        :disabled="loading"
+        color="secondary"
+        v-on:click="refreshMatch(87)">
         refresh La Liga Matches
       </v-btn>
     </div>
@@ -15,7 +21,7 @@
           xs12
           class="mb-3"
         >
-          <v-sheet height="500">
+          <v-sheet>
             <v-calendar
               ref="calendar"
               v-model="start"
@@ -79,7 +85,7 @@
             </v-calendar>
           </v-sheet>
         </v-flex>
-    
+
         <v-flex
           sm4
           xs12
@@ -152,16 +158,14 @@ export default {
   data () {
     return {
       matches: [],
+      loading: false,
       type: 'month',
       start: '2019-05-01',
       end: '2019-05-31',
       typeOptions: [
-        { text: 'Day', value: 'day' },
         { text: '4 Day', value: '4day' },
         { text: 'Week', value: 'week' },
-        { text: 'Month', value: 'month' },
-        { text: 'Custom Daily', value: 'custom-daily' },
-        { text: 'Custom Weekly', value: 'custom-weekly' }
+        { text: 'Month', value: 'month' }
       ],
       events: [
         {
@@ -228,6 +232,12 @@ export default {
       }).then((resp) => {
         console.log(resp.data)
         this.matches = resp.data.response
+        this.matches.map(match => {
+          match.title = `${match.homeTeam.name} vs ${match.awayTeam.name}`
+          match.details = `${match.goalsHomeTeam} : ${match.goalsAwayTeam}`
+          match.open = false
+          match.date = match.matchDate.substring(0, 10)
+        })
       })
     }
   },
@@ -235,7 +245,7 @@ export default {
     // convert the list of events into a map of lists keyed by date
     eventsMap () {
       const map = {}
-      this.events.forEach(e => (map[e.date] = map[e.date] || []).push(e))
+      this.matches.forEach(e => (map[e.date] = map[e.date] || []).push(e))
       return map
     }
   },
@@ -260,4 +270,19 @@ export default {
   margin: 0 auto;
   text-align: left;
 }
+.my-event {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 2px;
+  background-color: #1867c0;
+  color: #ffffff;
+  border: 1px solid #1867c0;
+  width: 100%;
+  font-size: 12px;
+  padding: 3px;
+  cursor: pointer;
+  margin-bottom: 1px;
+}
+
 </style>
