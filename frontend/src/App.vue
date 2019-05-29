@@ -22,6 +22,24 @@ export default {
     'nav-bar': NavBar,
     'nav-bar-top': NavBarTop,
     'nav-drawer': NavDrawer
+  },
+  created () {
+    console.log('App.vue')
+    let token = window.$cookies.get('FootballDiary')
+    if (token) {
+      this.$store.commit('setToken', token)
+      console.log('App.vue.afterSetToken')
+      this.$store.dispatch('getUserFromServer')
+    } else {
+      this.onLogout()
+    }
+  },
+  methods: {
+    onLogout: function () {
+      this.$store.commit('logout')
+      window.$cookies.remove('FootballDiary')
+      this.$router.push('/')
+    }
   }
 }
 </script>

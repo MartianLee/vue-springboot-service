@@ -30,7 +30,9 @@
     </div>
     <h2>Upcoming Matches</h2>
     <h2>My Recent Logs</h2>
-    <my-log-component></my-log-component>
+    <div class="container">
+      <my-log-component></my-log-component>
+    </div>
     <h2>Log Timeline</h2>
     <log-timeline></log-timeline>
   </div>
@@ -54,13 +56,6 @@ export default {
     }
   },
   created () {
-    let token = window.$cookies.get('FootballDiary')
-    if (token) {
-      this.$store.commit('setToken', token)
-      this.$store.dispatch('getUserFromServer')
-    } else {
-      this.onLogout()
-    }
   },
   computed: {
     ...mapGetters([
@@ -107,5 +102,10 @@ li {
 }
 a {
   color: #42b983;
+}
+.container {
+  margin: 0 auto;
+  text-align: left;
+  padding: 0;
 }
 </style>

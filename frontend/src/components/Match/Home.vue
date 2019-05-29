@@ -55,9 +55,11 @@
                         color="primary"
                         dark
                       >
-                        <v-btn icon>
-                          <v-icon>edit</v-icon>
-                        </v-btn>
+                        <router-link :to="{ path: `diary/write/${event.id}`}">
+                          <v-btn icon>
+                            <v-icon>edit</v-icon>
+                          </v-btn>
+                        </router-link>
                         <v-toolbar-title v-html="event.title"></v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-btn icon>

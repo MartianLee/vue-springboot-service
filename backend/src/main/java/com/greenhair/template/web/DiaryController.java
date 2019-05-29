@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/diary")
@@ -41,8 +42,8 @@ public class DiaryController {
     private JwtService jwtService;
 
     @GetMapping
-    public List<Diary> getDiary() {
-        long loginUserId = jwtService.getMemberId();
+    public List<Diary> getDiaryById(@RequestParam(required = false) Long id) {
+        long loginUserId = id;
         List<Diary> diaries = diaryRepository.findByUsersIdOrderByModifiedDateDesc(loginUserId);
         return diaries;
     }

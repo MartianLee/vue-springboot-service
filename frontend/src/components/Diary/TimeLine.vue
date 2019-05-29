@@ -31,17 +31,6 @@ export default {
     'my-log-component': MyLogComponent
   },
   created () {
-    let token = window.$cookies.get('FootballDiary')
-    if (token) {
-      this.$http.get('/api/diary', {
-        headers: {
-          Authorization: 'Bearer ' + token // the token is a variable which holds the token
-        }
-      }).then((resp) => {
-        console.log(resp.data)
-        this.diaries = resp.data
-      })
-    }
   }
 }
 </script>
